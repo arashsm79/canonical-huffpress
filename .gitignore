@@ -1,0 +1,6 @@
+DS_Project.pdf
+build/
+playground/
+cpptemplate.sh
+compile_commands.json
+.clangd/
