@@ -31,7 +31,5 @@ map<char, int>& HuffmanCompDecoder::readHeader(ifstream& inputFile, map<char, in
 	inputFile.read(&numberOfChar, 1);
 	vector<char> symbols(numberOfChar);
 	inputFile.read(&symbols[0], numberOfChar);
-
-
 	
 }
