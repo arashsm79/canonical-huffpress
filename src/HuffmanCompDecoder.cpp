@@ -11,7 +11,7 @@ void HuffmanCompDecoder::decode()
 	{
 		
 		HeapNode* codeTreeRoot = readHeader(f);
-		ofstream outFile(outputFileName, ios::out | ios::binary);
+		ofstream outFile(outputFileName);
 		f.close();
 		outFile.close();
 	}else{

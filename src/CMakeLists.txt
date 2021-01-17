@@ -1,18 +1,42 @@
-set(EXECUTABLE_NAME
+set( ENCODE_LIB
+	HuffmanCompEncoder)
+
+add_library(${ENCODE_LIB} 
+	HuffmanCompEncoder.cpp 
+	${CMAKE_SOURCE_DIR}/include/HuffmanComp/HuffmanCompEncoder.hpp
+	MinHeap.cpp
+	${CMAKE_SOURCE_DIR}/include/HuffmanComp/MinHeap.hpp)  
+
+
+set(INCLUDE_FOLDER
 	HuffmanComp)
 
-add_executable(${EXECUTABLE_NAME} main.cpp HuffmanCompEncoder.cpp  MinHeap.cpp  ${CMAKE_SOURCE_DIR}/include/HuffmanComp/MinHeap.hpp)
+target_include_directories(${ENCODE_LIB} PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/${INCLUDE_FOLDER}>
+    $<INSTALL_INTERFACE:include/${INCLUDE_FOLDER}>)
+
+target_include_directories(${ENCODE_LIB} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
+    $<INSTALL_INTERFACE:include>)
 
 
-target_compile_features(${EXECUTABLE_NAME} PRIVATE cxx_std_20)
+set( DECODE_LIB
+	HuffmanCompDecoder)
 
-target_compile_options(${EXECUTABLE_NAME} PRIVATE -Wall -Wextra -Wpedantic)
+add_library(${DECODE_LIB} 
+	HuffmanCompDecoder.cpp 
+	${CMAKE_SOURCE_DIR}/include/HuffmanComp/HuffmanCompDecoder.hpp
+	MinHeap.cpp
+	${CMAKE_SOURCE_DIR}/include/HuffmanComp/MinHeap.hpp)  
 
 
-target_include_directories(${EXECUTABLE_NAME} PRIVATE
-    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/${EXECUTABLE_NAME}>
-    $<INSTALL_INTERFACE:include/${EXECUTABLE_NAME}>)
+set(INCLUDE_FOLDER
+	HuffmanComp)
 
-target_include_directories(${EXECUTABLE_NAME} PUBLIC
+target_include_directories(${DECODE_LIB} PRIVATE
+    $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include/${INCLUDE_FOLDER}>
+    $<INSTALL_INTERFACE:include/${INCLUDE_FOLDER}>)
+
+target_include_directories(${DECODE_LIB} PUBLIC
     $<BUILD_INTERFACE:${CMAKE_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>)

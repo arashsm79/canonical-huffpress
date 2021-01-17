@@ -13,8 +13,6 @@ void MinHeap::insert(HeapNode &element){
 		std::swap(heapVec[curIndex], heapVec[parent(curIndex)]); 
 		curIndex = parent(curIndex); 
 	} 
-	std::cout << "Insert: ";
-	printHeap();
 }
 
 HeapNode* MinHeap::pop(){
