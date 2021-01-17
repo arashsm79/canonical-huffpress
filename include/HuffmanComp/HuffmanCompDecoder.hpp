@@ -20,8 +20,8 @@ class HuffmanCompDecoder {
 	public:
 		HuffmanCompDecoder(string inputFileName, string outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
 		void decode();
-		map<char, int>& readHeader(ifstream& inputFile, map<char, int>& canonicalLengthMap);
-
-
+		HeapNode* readHeader(ifstream& inputFile);
+		void addToCodeTree(HeapNode* root, char symbol, int length, int code);
+		void readBody(ifstream& inputFile, ofstream& outputFile, HeapNode* codeTreeRoot);
 };
 #endif
