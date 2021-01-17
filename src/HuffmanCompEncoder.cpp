@@ -2,7 +2,6 @@
 #include <cstdint>
 #include <fstream>
 #include <unordered_map>
-#include <unordered_set>
 #include "MinHeap.hpp"
 #include "HuffmanCompEncoder.hpp"
 
@@ -52,7 +51,10 @@ void HuffmanCompEncoder::wrtieHeader(ofstream& outFile, map<char, pair<int, int>
 
 	std::sort(vec.begin(), vec.end(),
 			[](const pair<char, pair<int, int>>& l, const pair<char, pair<int, int>>& r) {
-			return l.second.first < r.second.first;
+			if( l.second.first == r.second.first)
+				return l.first < r.first;
+			else 
+				return l.second.first < r.second.first;
 			});
 
 	uint8_t maxLength = (uint8_t) vec[vec.size()-1].second.first;

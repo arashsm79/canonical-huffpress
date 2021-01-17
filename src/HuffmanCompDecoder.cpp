@@ -1,5 +1,4 @@
 #include <bits/stdc++.h>
-#include <bitset>
 #include <cstdint>
 #include <fstream>
 #include "HuffmanCompDecoder.hpp"
@@ -38,7 +37,6 @@ void HuffmanCompDecoder::readBody(ifstream& inputFile, ofstream& outputFile, Hea
 			{
 				bitCount--;
 				char bit = (byte & (1<<bitCount)) ? 1 :0;
-				cout << (int) bit ;
 
 				if(!currNode->isIntermediate())
 				{
