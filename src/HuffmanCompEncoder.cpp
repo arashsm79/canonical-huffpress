@@ -23,7 +23,6 @@ void HuffmanCompEncoder::encode()
 		std::for_each(inputText.begin(), inputText.end(), [](char & c){
 				c = ::tolower(c);
 				});
-		//inputText.erase(std::remove(inputText.begin(), inputText.end(), '\n'), inputText.end());
 
 		f.close();
 

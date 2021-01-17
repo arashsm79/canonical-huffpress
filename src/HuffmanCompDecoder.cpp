@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <bitset>
 #include <cstdint>
 #include <fstream>
 #include "HuffmanCompDecoder.hpp"
@@ -12,6 +13,7 @@ void HuffmanCompDecoder::decode()
 		
 		HeapNode* codeTreeRoot = readHeader(f);
 		ofstream outFile(outputFileName);
+		readBody(f, outFile, codeTreeRoot);
 		f.close();
 		outFile.close();
 	}else{
@@ -25,29 +27,30 @@ void HuffmanCompDecoder::readBody(ifstream& inputFile, ofstream& outputFile, Hea
 		inputFile.seekg(0, inputFile.end);
 		const auto bodySize = inputFile.tellg() - currentLoc;
 		vector<char> body(bodySize);
+		inputFile.seekg(currentLoc);
 		inputFile.read(&body[0], bodySize);
 
 		HeapNode* currNode = codeTreeRoot;
 		for(auto& byte : body)
 		{
-			char bitCount = 7;
+			char bitCount = 8;
 			while(bitCount)
 			{
+				bitCount--;
 				char bit = (byte & (1<<bitCount)) ? 1 :0;
+				cout << (int) bit ;
 
-				if(currNode->isIntermediate())
+				if(!currNode->isIntermediate())
 				{
-					if(bit)
-						currNode = currNode->getRightChild();
-					else
-						currNode = currNode->getLeftChild();
-				}else
-				{
-					currNode = codeTreeRoot;
 					outputFile << currNode->getKey();
+					currNode = codeTreeRoot;
 				}
 
-				bitCount--;
+				if(bit)
+					currNode = currNode->getRightChild();
+				else
+					currNode = currNode->getLeftChild();
+
 			}
 		}
 }
@@ -69,7 +72,7 @@ HeapNode* HuffmanCompDecoder::readHeader(ifstream& inputFile)
 
 	int currCode = 0;
 
-	int previousCode = 0;
+	int previousCode = -1;
 	int previousLength = 0;
 
 	for(int i = 0; i < (int) length.size(); i++)
@@ -82,7 +85,7 @@ HeapNode* HuffmanCompDecoder::readHeader(ifstream& inputFile)
 
 				currCode = (previousCode + 1) << (i - previousLength);
 
-				addToCodeTree(root, c, i, currCode);
+				addToCodeTree(root, c, i+1, currCode);
 				symbolsIndex++;
 				previousCode = currCode;
 				previousLength = i;
@@ -126,10 +129,8 @@ void HuffmanCompDecoder::addToCodeTree(HeapNode* root, char symbol, int length, 
 	{
 		HeapNode* n = new HeapNode(symbol, 0, false);
 		root->setRightChild(*n);
-		root = root->getRightChild();
 	}else {
 		HeapNode* n = new HeapNode(symbol, 0, false);
 		root->setLeftChild(*n);
-		root = root->getLeftChild();
 	}
 }
