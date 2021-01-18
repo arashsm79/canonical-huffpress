@@ -30,9 +30,13 @@ void HuffmanCompDecoder::readBody(ifstream& inputFile, ofstream& outputFile, Hea
 		inputFile.read(&body[0], bodySize);
 
 		HeapNode* currNode = codeTreeRoot;
-		for(auto& byte : body)
+		char byte = 0;
+		char bitCount = 8;
+
+		for(auto it = body.begin(); it != body.end()-2; it++)
 		{
-			char bitCount = 8;
+			byte = *it;
+			bitCount = 8;
 			while(bitCount)
 			{
 				bitCount--;
@@ -48,10 +52,37 @@ void HuffmanCompDecoder::readBody(ifstream& inputFile, ofstream& outputFile, Hea
 					currNode = currNode->getRightChild();
 				else
 					currNode = currNode->getLeftChild();
-
 			}
 		}
+
+		// Handling EOF
+		char validBits = *(body.end()-1);
+		byte  = *(body.end()-2);
+		bitCount = 8;
+		while(bitCount && validBits)
+		{
+			bitCount--;
+			validBits--;
+			char bit = (byte & (1<<bitCount)) ? 1 :0;
+
+			if(!currNode->isIntermediate())
+			{
+				outputFile << currNode->getKey();
+				currNode = codeTreeRoot;
+			}
+
+			if(bit)
+				currNode = currNode->getRightChild();
+			else
+				currNode = currNode->getLeftChild();
+		}
+
+		// Add line feed (POSIX standard for text files requires a 
+		// newline character to indicate the end of a text file)
+		outputFile << (char) 10;
 }
+
+
 HeapNode* HuffmanCompDecoder::readHeader(ifstream& inputFile)
 {
 	char maxLength = 0;

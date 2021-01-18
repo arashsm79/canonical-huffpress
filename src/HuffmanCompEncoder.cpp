@@ -111,8 +111,13 @@ void HuffmanCompEncoder::writeEncodedText(ofstream& outFile, string& inputText, 
 			bitCount++;
 		}
 	}
-	if(bitCount != 0)
-		outFile.write(&buffer, 1);
+
+	outFile.write(&buffer, 1);
+
+	// Write the number of useful bits of the second to last byte in the last byte
+	buffer = bitCount;
+	outFile.write(&buffer, 1);
+	
 	outFile.flush();
 
 }
