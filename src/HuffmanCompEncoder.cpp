@@ -52,7 +52,7 @@ HuffmanCompEncoder::~HuffmanCompEncoder()
 	}
 }
 
-void HuffmanCompEncoder::wrtieHeader(ofstream& outFile, map<char, pair<int, int>>& canonicalCodeMap)
+void HuffmanCompEncoder::wrtieHeader(ofstream& outFile, unordered_map<char, pair<int, int>>& canonicalCodeMap)
 {
 
 	std::vector<pair<char, pair<int, int>> > vec;
@@ -99,7 +99,7 @@ void HuffmanCompEncoder::wrtieHeader(ofstream& outFile, map<char, pair<int, int>
 	}
 }
 
-void HuffmanCompEncoder::writeEncodedText(ofstream& outFile, string& inputText, map<char, pair<int, int>>& canonicalCodeMap)
+void HuffmanCompEncoder::writeEncodedText(ofstream& outFile, string& inputText, unordered_map<char, pair<int, int>>& canonicalCodeMap)
 {
 	int bitCount = 0;
 	char buffer = 0;
@@ -154,7 +154,7 @@ HeapNode* HuffmanCompEncoder::createHuffmanTree(unordered_map<char, int>& freqMa
 }
 
 
-map<char, pair<int, int>>& HuffmanCompEncoder::generateCanonicalCode(map<int, set<char>*>& codeLengthMap, map<char, pair<int, int>>& canonicalCodeMap)
+unordered_map<char, pair<int, int>>& HuffmanCompEncoder::generateCanonicalCode(map<int, set<char>*>& codeLengthMap, unordered_map<char, pair<int, int>>& canonicalCodeMap)
 {
 	int previousLength = 0;
 	int currVal = 0;
