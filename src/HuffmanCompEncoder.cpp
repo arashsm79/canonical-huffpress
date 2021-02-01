@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 #include <cstdint>
 #include <fstream>
+#include <stdexcept>
 #include <unordered_map>
 #include "MinHeap.hpp"
 #include "HuffmanCompEncoder.hpp"
@@ -14,6 +15,7 @@ void HuffmanCompEncoder::encode()
 
 	if (f)
 	{
+		// Read the text into a string
 		f.seekg(0, std::ios::end);
 		const auto size = f.tellg();
 		string inputText(size, ' ');
@@ -25,19 +27,20 @@ void HuffmanCompEncoder::encode()
 
 		f.close();
 
+		// Generate the canonical code
 		getFrequency(inputText, this->freqMap);
 		HeapNode* root = createHuffmanTree(this->freqMap, this->freqTree);
 		getCodeLength(root, 0);
 		generateCanonicalCode(this->codeLengthMap, this->canonicalCodeMap);
 
+		// Use the generated canonical code to encode the text
 		ofstream outFile(outputFileName, ios::out | ios::binary);
-
-		wrtieHeader(outFile, this->canonicalCodeMap);
+		writeHeader(outFile, this->canonicalCodeMap);
 		writeEncodedText(outFile, inputText, this->canonicalCodeMap);
 		outFile.close();
 
 	}else{
-		cout << "invalid file." << endl;
+		throw std::invalid_argument("HuffmanComp Encoder: File not found");
 	}
 }
 
@@ -52,7 +55,7 @@ HuffmanCompEncoder::~HuffmanCompEncoder()
 	}
 }
 
-void HuffmanCompEncoder::wrtieHeader(ofstream& outFile, unordered_map<char, pair<int, int>>& canonicalCodeMap)
+void HuffmanCompEncoder::writeHeader(ofstream& outFile, unordered_map<char, pair<int, int>>& canonicalCodeMap)
 {
 
 	std::vector<pair<char, pair<int, int>> > vec;

@@ -16,17 +16,17 @@ class HuffmanCompEncoder {
 		map<int, set<char>*> codeLengthMap;
 		unordered_map<char, pair<int, int>> canonicalCodeMap;
 		string inputFileName, outputFileName;
-
-	public:
-		HuffmanCompEncoder(string inputFileName, string outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
-		~HuffmanCompEncoder();
 		unordered_map<char, int>& getFrequency(string str, unordered_map<char, int>& freqMap);
 		HeapNode* createHuffmanTree(unordered_map<char, int>& freqMap, MinHeap& freqTree);
 		void getCodeLength(HeapNode* freqTreeRoot, int length);
 		unordered_map<char, pair<int, int>>& generateCanonicalCode(map<int, set<char>*>& codeLengthMap, unordered_map<char, pair<int, int>>& canonicalCodeMap);
-		void encode();
-		void wrtieHeader(ofstream& outFile, unordered_map<char, pair<int, int>>& canonicalCodeMap);
+		void writeHeader(ofstream& outFile, unordered_map<char, pair<int, int>>& canonicalCodeMap);
 		void writeEncodedText(ofstream& outfile, string& inputText, unordered_map<char, pair<int, int>>& canonicalCodeMap);
+
+	public:
+		HuffmanCompEncoder(string inputFileName, string outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
+		~HuffmanCompEncoder();
+		void encode();
 
 };
 #endif

@@ -16,6 +16,9 @@ class HuffmanCompDecoder {
 		string inputFileName, outputFileName;
 		map<char, int> canonicalLengthMap;
 		HeapNode *canonicalTreeRoot = NULL;
+		HeapNode* readHeader(ifstream& inputFile);
+		void addToCodeTree(HeapNode* root, char symbol, int length, int code);
+		void readBody(ifstream& inputFile, ofstream& outputFile, HeapNode* codeTreeRoot);
 
 	public:
 		HuffmanCompDecoder(string inputFileName, string outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
@@ -25,8 +28,5 @@ class HuffmanCompDecoder {
 				delete this->canonicalTreeRoot;
 		};
 		void decode();
-		HeapNode* readHeader(ifstream& inputFile);
-		void addToCodeTree(HeapNode* root, char symbol, int length, int code);
-		void readBody(ifstream& inputFile, ofstream& outputFile, HeapNode* codeTreeRoot);
 };
 #endif
