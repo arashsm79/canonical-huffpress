@@ -10,9 +10,9 @@ void HuffmanCompDecoder::decode()
 	if (f)
 	{
 		
-		HeapNode* codeTreeRoot = readHeader(f);
+		this->canonicalTreeRoot = readHeader(f);
 		ofstream outFile(outputFileName);
-		readBody(f, outFile, codeTreeRoot);
+		readBody(f, outFile, this->canonicalTreeRoot);
 		f.close();
 		outFile.close();
 	}else{

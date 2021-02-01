@@ -40,6 +40,18 @@ void HuffmanCompEncoder::encode()
 		cout << "invalid file." << endl;
 	}
 }
+
+
+HuffmanCompEncoder::~HuffmanCompEncoder()
+{
+	// Clean up code length map
+	for(auto& p : this->codeLengthMap)
+	{
+		if(p.second)
+			delete p.second;
+	}
+}
+
 void HuffmanCompEncoder::wrtieHeader(ofstream& outFile, map<char, pair<int, int>>& canonicalCodeMap)
 {
 

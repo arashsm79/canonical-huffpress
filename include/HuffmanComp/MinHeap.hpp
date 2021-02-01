@@ -21,6 +21,14 @@ class HeapNode {
                     : key(key), data(data), left(&left), right(&right),
                       intermediate(isIntermediate){};
 
+		~HeapNode()
+		{
+			if(this->left)
+				delete this->left;
+			if(this->right)
+				delete this->right;
+		}
+
                 char getKey(){return key;};
 		void setKey(char key){this->key = key;};
 
@@ -45,6 +53,13 @@ class MinHeap {
 
 	public:
 		MinHeap(){};
+		~MinHeap(){
+			for(auto &n : this->heapVec)
+			{
+				if(n)
+					delete n;
+			}
+		};
 		void insert(HeapNode& element);
 		HeapNode* pop();
 		void heapify(int index);
