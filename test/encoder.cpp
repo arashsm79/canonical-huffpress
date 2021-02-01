@@ -7,6 +7,10 @@ int main(int argc, char** argv)
 	string OutputFileName = argv[2];
 
 	HuffmanCompEncoder encoder(InputFileName, OutputFileName);
-	encoder.encode();
+	try {
+		encoder.encode();
+	} catch (const std::invalid_argument& e) {
+		cout << "Invalid file path" << endl;
+	}
 
 }

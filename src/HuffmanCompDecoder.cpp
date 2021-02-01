@@ -16,7 +16,7 @@ void HuffmanCompDecoder::decode()
 		f.close();
 		outFile.close();
 	}else{
-		cout << "invalid file." << endl;
+		throw std::invalid_argument("HuffmanComp Encoder: File not found");
 	}
 }
 

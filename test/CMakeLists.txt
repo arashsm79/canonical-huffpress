@@ -43,7 +43,7 @@ set(MINHEAP_TEST
 	MinHeapTest)
 
 add_executable(${MINHEAP_TEST} 
-	test.cpp  
+	MinHeapTest.cpp  
 	${CMAKE_SOURCE_DIR}/src/MinHeap.cpp  
 	${CMAKE_SOURCE_DIR}/include/HuffmanComp/MinHeap.hpp)
 target_compile_features(${MINHEAP_TEST} PRIVATE cxx_std_20)

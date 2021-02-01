@@ -7,5 +7,9 @@ int main(int argc, char** argv)
 	string OutputFileName = argv[2];
 
 	HuffmanCompDecoder decoder(InputFileName, OutputFileName);
-	decoder.decode();
+	try {
+		decoder.decode();
+	} catch (const std::invalid_argument& e) {
+		cout << "Invalid file path" << endl;
+	}
 }

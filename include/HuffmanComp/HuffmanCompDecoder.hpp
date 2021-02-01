@@ -21,7 +21,7 @@ class HuffmanCompDecoder {
 		void readBody(ifstream& inputFile, ofstream& outputFile, HeapNode* codeTreeRoot);
 
 	public:
-		HuffmanCompDecoder(string inputFileName, string outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
+		HuffmanCompDecoder(const string& inputFileName, const string& outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
 		~HuffmanCompDecoder()
 		{
 			if (this->canonicalTreeRoot)

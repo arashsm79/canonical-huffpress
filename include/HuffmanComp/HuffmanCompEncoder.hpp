@@ -24,7 +24,7 @@ class HuffmanCompEncoder {
 		void writeEncodedText(ofstream& outfile, string& inputText, unordered_map<char, pair<int, int>>& canonicalCodeMap);
 
 	public:
-		HuffmanCompEncoder(string inputFileName, string outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
+		HuffmanCompEncoder(const string& inputFileName, const string& outputFileName):inputFileName(inputFileName), outputFileName(outputFileName){};
 		~HuffmanCompEncoder();
 		void encode();
 
