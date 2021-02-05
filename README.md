@@ -45,20 +45,20 @@ target_link_libraries(${TARGET_NAME} HuffmanCompEncoder)
 After including the header files, instantiate the class and use the encode method:
 ```cpp
 
-	HuffmanCompEncoder encoder(InputFileName, OutputFileName);
-	try {
-		encoder.encode();
-	} catch (const std::invalid_argument& e) {
-		cout << "Invalid file path" << endl;
-	}
+HuffmanCompEncoder encoder("/path/to/InputTextFile", "/path/to/OutPutBinaryFile");
+try {
+	encoder.encode();
+} catch (const std::invalid_argument& e) {
+	cout << "Invalid file path" << endl;
+}
 
 
-	HuffmanCompDecoder decoder(InputFileName, OutputFileName);
-	try {
-		decoder.decode();
-	} catch (const std::invalid_argument& e) {
-		cout << "Invalid file path" << endl;
-	}
+HuffmanCompDecoder decoder("/path/to/InputBinaryFile", "/path/to/OutPutTextFile");
+try {
+	decoder.decode();
+} catch (const std::invalid_argument& e) {
+	cout << "Invalid file path" << endl;
+}
 
 ```
 

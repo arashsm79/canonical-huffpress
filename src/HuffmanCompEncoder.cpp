@@ -21,10 +21,6 @@ void HuffmanCompEncoder::encode()
 		string inputText(size, ' ');
 		f.seekg(0);
 		f.read(&inputText[0], size);
-		std::for_each(inputText.begin(), inputText.end(), [](char & c){
-				c = ::tolower(c);
-				});
-
 		f.close();
 
 		// Generate the canonical code
@@ -108,8 +104,8 @@ void HuffmanCompEncoder::writeEncodedText(ofstream& outFile, string& inputText, 
 	char buffer = 0;
 	for(auto& c : inputText)
 	{
-		char length = canonicalCodeMap[c].first;
-		char code = canonicalCodeMap[c].second;
+		int length = canonicalCodeMap[c].first;
+		int code = canonicalCodeMap[c].second;
 
 		for(int i = length; i > 0; i--)
 		{
